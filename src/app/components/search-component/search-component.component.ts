@@ -12,29 +12,24 @@ import { CommonModule } from '@angular/common';
 })
 export class SearchComponent {
     movieName: string='';
+    year: string = '';
     movies: any[] = []; // массив для хранения списка фильмов
     moviesDetails: any[]=[]; 
     selectedMovie: any; // выбранный фильм для отображения информации
 
     constructor(private requestService:RequestService){}
-    // search(): void {
-    //   if (this.movieName.trim() !== '') {
-    //     this.requestService.searchMovieByName(this.movieName).subscribe(
-    //       (data) => {
-    //         console.log('Movie data:', data);
-    //         // Обработка полученных данных
-    //       },
-    //       (error) => {
-    //         console.error('Error fetching movie data:', error);
-    //         // Обработка ошибки
-    //       }
-    //     );
-    //   } else {
-    //     console.warn('Please enter a movie name');
-    //     // Обработка случая, когда поле ввода пустое
-    //   }
-    // }
-    search(): void {
+    
+    search():void{
+      if (this.year.trim() === '' && this.movieName.trim() !== '') {
+        this.searchByTitle();
+      } else if (this.year.trim() !== '' && this.movieName.trim() !== '') {
+        this.searchByTitleAndYear();
+      } else {
+        console.warn('Please enter a movie title');
+      }
+    }
+
+    searchByTitle(): void {
       this.requestService.searchMovieByName(this.movieName).subscribe(
         (data) => {
           console.log('Movie data:', data);
@@ -71,6 +66,37 @@ export class SearchComponent {
       }
     } 
 
-    
+    searchByTitleAndYear(): void {
+      this.requestService.searchMovieByTitleAndYear(this.movieName, this.year).subscribe(
+        (data) => {
+          console.log('Movie data:', data);
+          this.movies = data.Search; // сохраняем массив фильмов
+          console.log(this.movies);
+          // debugger;
+          if (this.movies && this.movies.length > 0) {
+            // если есть фильмы, выбираем первый для отображения информации
+            this.selectedMovie = this.movies[0];
+            console.log('Movie IDs:', this.movies.map(movie => movie.imdbID));
+            this.searchDetails();
+          } else {
+            // если фильмов не найдено, сбрасываем выбранный фильм
+            this.selectedMovie = null;
+          }
+        },
+        (error) => {
+          console.error('Error fetching movie data:', error);
+        }
+      );
+    }
+    // searchByTitleAndYear(): void {
+    //   this.requestService.searchMovieByTitleAndYear(this.movieName, this.year).subscribe(
+    //     (data) => {
+    //       console.log('Movie data:', data);
+    //       this.movieData = data; // сохраняем полученные данные о фильме
+    //     },
+    //     (error) => {
+    //       console.error('Error fetching movie data:', error);
+    //     }
+    //   );
   }
 
