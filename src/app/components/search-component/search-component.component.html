@@ -1,0 +1,22 @@
+<div class="row">
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Введите название фильма" 
+    aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="movieName">
+    <button class="btn btn-outline-secondary" type="button" (click)="search()" id="button-addon2">Button</button>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col" *ngFor="let movie of  moviesDetails">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.Title }}</h5>
+          <p class="card-text">Год выпуска: {{ movie.Year }}</p>
+          <p class="card-text">Рейтинг: {{ movie.imdbRating }}</p>
+          <p class="card-text">Продолжительность: {{ movie.Runtime }}</p>
+          <p class="card-text">Режиссер: {{ movie.Director }}</p>
+          <p class="card-text">Актерский состав: {{ movie.Actors }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
