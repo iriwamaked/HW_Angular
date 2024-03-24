@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class SearchComponent {
     movieName: string='';
     year: string = '';
+    plotType: string = 'short'
     movies: any[] = []; // массив для хранения списка фильмов
     moviesDetails: any[]=[]; 
     selectedMovie: any; // выбранный фильм для отображения информации
@@ -88,15 +89,10 @@ export class SearchComponent {
         }
       );
     }
-    // searchByTitleAndYear(): void {
-    //   this.requestService.searchMovieByTitleAndYear(this.movieName, this.year).subscribe(
-    //     (data) => {
-    //       console.log('Movie data:', data);
-    //       this.movieData = data; // сохраняем полученные данные о фильме
-    //     },
-    //     (error) => {
-    //       console.error('Error fetching movie data:', error);
-    //     }
-    //   );
+    changePlotType(): void {
+      // Змінюємо значення plotType на протилежне значення ('short' стає 'full' і навпаки)
+      this.plotType = this.plotType === 'short' ? 'full' : 'short';
+    }
+    
   }
 
