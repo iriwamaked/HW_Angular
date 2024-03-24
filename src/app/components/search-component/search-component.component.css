@@ -1,0 +1,14 @@
+.row{
+    display: grid;
+    text-align: center;
+}
+
+input{
+    margin: 5px;
+    /* width: 20%; */
+}
+
+button{
+    margin: 5px;
+}
+
