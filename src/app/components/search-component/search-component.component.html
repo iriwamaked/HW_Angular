@@ -1,11 +1,11 @@
 <div class="row">
-<div class="input-group mb-3">
-    <input type="text" class="form-control mb-3" placeholder="Введите название фильма" 
+<div class="input-group mb-2  gap-4">
+    <input type="text" class="form-control mb-2" placeholder="Введите название фильма" 
     aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="movieName">
-    <input type="text" class="form-control mb-3" placeholder="Введите год выпуска" 
+    <input type="text" class="form-control mb-2" placeholder="Введите год выпуска" 
     aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="year">
-    <input type="checkbox" class="mb-3" [(ngModel)]="plotType" (change)="changePlotType()">
-<label for="plotTypeCheckbox">Повний опис</label>
+    <input type="checkbox" class="mb-2" [(ngModel)]="plotType" (change)="changePlotType()">
+<label for="plotTypeCheckbox" class="mb-2">Повний опис</label>
     <button class="btn btn-outline-secondary" type="button" (click)="search()" id="button-addon2">Button</button>
   </div>
 </div>
